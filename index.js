@@ -1,3 +1,44 @@
+let no_of_player_wins = 0;
+let no_of_computer_wins = 0;
+let no_of_draws = 0;
+
+const btn_rock = document.querySelector('.btn_rock');
+const btn_paper = document.querySelector('.btn_paper');
+const btn_scissors = document.querySelector('.btn_scissors');
+
+const round_result = document.createElement('div');
+round_result.classList.add('round_result');
+const game_result = document.createElement('div');
+game_result.classList.add('game_result');
+const game_record = document.createElement('ul');
+const wins = document.createElement('li');
+const draws = document.createElement('li');
+const losses = document.createElement('li');
+wins.textContent = 'Wins : 0';
+draws.textContent = 'Draws : 0';
+losses.textContent = 'Losses : 0';
+game_record.appendChild(wins);
+game_record.appendChild(draws);
+game_record.appendChild(losses);
+
+btn_rock.addEventListener('click', playRoundRock);
+btn_paper.addEventListener('click', playRoundScissors);
+btn_scissors.addEventListener('click', playRoundScissors);
+
+function playRoundRock(){
+  playRound('rock', getComputerChoice());
+}
+function playRoundPaper(){
+  playRound('paper', getComputerChoice());
+}
+function playRoundScissors(){
+  playRound('scissors', getComputerChoice());
+}
+
+const container = document.querySelector('.container');
+container.appendChild(round_result);
+container.appendChild(game_record);
+
 function getComputerChoice() {
   let randomNum = Math.floor(Math.random() * 3) + 1;
   if (randomNum == 1) {
@@ -6,19 +47,6 @@ function getComputerChoice() {
     return "paper";
   } else {
     return "scissors";
-  }
-}
-
-function getPlayerChoice() {
-  let choice = prompt("Enter rock, paper or scissors!");
-  if (
-    choice.toLowerCase() == "rock" ||
-    choice.toLowerCase() == "paper" ||
-    choice.toLowerCase() == "scissors"
-  )
-    return choice.toLowerCase();
-  else {
-    choice = prompt("Enter rock, paper or scissors!");
   }
 }
 
@@ -38,49 +66,64 @@ function getWinner(move1, move2) {
   }
 }
 
-let no_of_player_wins = 0;
-let no_of_computer_wins = 0;
-let no_of_draws = 0;
 function playRound(playerSelection, computerSelection) {
   let outcome = getWinner(playerSelection, computerSelection);
   if (outcome == "draw") {
     no_of_draws++;
-    return "Draw";
+    draws.textContent = `Draws : ${no_of_draws}`;
+    round_result.textContent = "Draw";
   } else if (outcome === playerSelection) {
     no_of_player_wins++;
-    return `You win! ${
-      playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1)
-    } beats ${
-      computerSelection.charAt(0).toUpperCase() + computerSelection.slice(1)
-    }`;
+    wins.textContent = `Wins : ${no_of_player_wins}`;
+    round_result.textContent = `You win! ${playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1)} beats ${computerSelection.charAt(0).toUpperCase() + computerSelection.slice(1)}`;
   } else {
     no_of_computer_wins++;
-    return `You lose. ${
-      computerSelection.charAt(0).toUpperCase() + computerSelection.slice(1)
-    } beats ${
-      playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1)
-    }`;
+    losses.textContent = `Losses : ${no_of_computer_wins}`;
+    round_result.textContent = `You lose. ${computerSelection.charAt(0).toUpperCase() + computerSelection.slice(1)} beats ${playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1)}`;
+  }
+  if(no_of_player_wins + no_of_computer_wins + no_of_draws == 5){
+    if (no_of_player_wins > no_of_computer_wins) {
+      game_result.textContent = `You won the game! You've won ${no_of_player_wins} and drawn ${no_of_draws} out of 5 rounds!`;
+      container.appendChild(game_result);
+    } else if (no_of_computer_wins > no_of_player_wins) {
+      game_result.textContent = `You lost. You've won ${no_of_player_wins} and drawn ${no_of_draws} out of 5 rounds`;
+      container.appendChild(game_result);
+    } else {
+      game_result.textContent = `Game Draw! You've won ${no_of_player_wins} rounds, lost ${no_of_computer_wins} and drawn ${no_of_draws} out of 5 rounds`;
+      container.appendChild(game_result);
+    }
   }
 }
 
-function game() {
-  for (let i = 0; i < 5; i++) {
-    console.log(`ROUND ${i + 1} OF 5`);
-    console.log(playRound(getPlayerChoice(), getComputerChoice()));
-  }
-  if (no_of_player_wins > no_of_computer_wins) {
-    console.log(
-      `You won the game! You've won ${no_of_player_wins} and drawn ${no_of_draws} out of 5 rounds!`
-    );
-  } else if (no_of_computer_wins > no_of_player_wins) {
-    console.log(
-      `You lost. You've won ${no_of_player_wins} and drawn ${no_of_draws} out of 5 rounds`
-    );
-  } else {
-    console.log(
-      `Game Draw! You've won ${no_of_player_wins} rounds, lost ${no_of_computer_wins} and drawn ${no_of_draws} out of 5 rounds`
-    );
-  }
+
+if(no_of_player_wins + no_of_computer_wins + no_of_draws >= 5){
+  btn_rock.removeEventListener('click', playRoundRock);
+  btn_paper.removeEventListener('click', playRoundPaper);
+  btn_scissors.removeEventListener('click', playRoundScissors);
 }
 
-game();
+
+
+
+// function game() {
+//   for (let i = 0; i < 5; i++) {
+//     console.log(`ROUND ${i + 1} OF 5`);
+//     console.log(playRound(getPlayerChoice(), getComputerChoice()));
+//   }
+//   if (no_of_player_wins > no_of_computer_wins) {
+//     console.log(
+//       `You won the game! You've won ${no_of_player_wins} and drawn ${no_of_draws} out of 5 rounds!`
+//     );
+//   } else if (no_of_computer_wins > no_of_player_wins) {
+//     console.log(
+//       `You lost. You've won ${no_of_player_wins} and drawn ${no_of_draws} out of 5 rounds`
+//     );
+//   } else {
+//     console.log(
+//       `Game Draw! You've won ${no_of_player_wins} rounds, lost ${no_of_computer_wins} and drawn ${no_of_draws} out of 5 rounds`
+//     );
+//   }
+// }
+
+
+// game();
