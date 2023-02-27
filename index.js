@@ -25,13 +25,23 @@ btn_rock.addEventListener('click', playRoundRock);
 btn_paper.addEventListener('click', playRoundScissors);
 btn_scissors.addEventListener('click', playRoundScissors);
 
+let round_count = 0;
 function playRoundRock(){
+  if(round_count == 5){
+    return;
+  }
   playRound('rock', getComputerChoice());
 }
 function playRoundPaper(){
+  if(round_count == 5){
+    return;
+  }
   playRound('paper', getComputerChoice());
 }
 function playRoundScissors(){
+  if(round_count == 5){
+    return;
+  }
   playRound('scissors', getComputerChoice());
 }
 
@@ -67,6 +77,7 @@ function getWinner(move1, move2) {
 }
 
 function playRound(playerSelection, computerSelection) {
+  round_count++;
   let outcome = getWinner(playerSelection, computerSelection);
   if (outcome == "draw") {
     no_of_draws++;
@@ -95,35 +106,8 @@ function playRound(playerSelection, computerSelection) {
   }
 }
 
-
 if(no_of_player_wins + no_of_computer_wins + no_of_draws >= 5){
   btn_rock.removeEventListener('click', playRoundRock);
   btn_paper.removeEventListener('click', playRoundPaper);
   btn_scissors.removeEventListener('click', playRoundScissors);
 }
-
-
-
-
-// function game() {
-//   for (let i = 0; i < 5; i++) {
-//     console.log(`ROUND ${i + 1} OF 5`);
-//     console.log(playRound(getPlayerChoice(), getComputerChoice()));
-//   }
-//   if (no_of_player_wins > no_of_computer_wins) {
-//     console.log(
-//       `You won the game! You've won ${no_of_player_wins} and drawn ${no_of_draws} out of 5 rounds!`
-//     );
-//   } else if (no_of_computer_wins > no_of_player_wins) {
-//     console.log(
-//       `You lost. You've won ${no_of_player_wins} and drawn ${no_of_draws} out of 5 rounds`
-//     );
-//   } else {
-//     console.log(
-//       `Game Draw! You've won ${no_of_player_wins} rounds, lost ${no_of_computer_wins} and drawn ${no_of_draws} out of 5 rounds`
-//     );
-//   }
-// }
-
-
-// game();
