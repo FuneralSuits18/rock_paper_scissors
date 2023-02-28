@@ -3,6 +3,7 @@
   --color-bg: #4f1183;
   --color-button: #303038;
   --color-white: #f2f2fe;
+  --color-grey: #9c9c9c;
 
   --border-radius-1: 0.5rem;
 
@@ -21,9 +22,9 @@
   background-color: var(--color-bg);
 }
 
-.container {
-  padding-top: 3rem;
-  font-family: 'Montserrat', sans-serif;
+body {
+  font-family: 'Roboto Mono', monospace, sans-serif;
+  font-weight: 200;
   line-height: 1.6;
   color: var(--color-primary);
   overflow-x: hidden;
@@ -31,12 +32,22 @@
   color: var(--color-white);
 }
 
-.btn__container {
+.container {
+  padding-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.btn_container {
   display: flex;
   justify-content: center;
+  gap: 3%;
+  padding-bottom: 2rem;
 }
 
 .btn {
+  font-family: 'Roboto Mono', monospace, sans-serif;
   display: inline-block;
   width: fit-content;
   padding: 0.6rem 1.2rem;
@@ -51,4 +62,43 @@
 .btn:hover {
   background-color: var(--color-white);
   color: var(--color-button);
+}
+
+.btn.play {
+  font-size: larger;
+  font-weight: 600;
+  transition: var(--transition);
+}
+
+.game_status {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.name_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 10rem;
+  padding-bottom: 5rem;
+}
+
+.name {
+  font-family: 'Tilt Prism', cursive;
+  font-size: xx-large;
+}
+
+.name_subtext {
+  text-align: center;
+  padding: 2rem 3rem;
+}
+
+.game_container {
+  padding-bottom: 10rem;
+}
+
+.round_result {
+  padding: 1.5rem 0 2rem 0;
 }

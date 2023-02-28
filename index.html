@@ -4,16 +4,28 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Rock Paper Scissors</title>
   <script src="index.js" defer></script>
+  <link href="https://fonts.googleapis.com/css2?family=Tilt+Prism&display=swap" rel="stylesheet"> 
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@200;400&display=swap" rel="stylesheet">  
   <link rel="stylesheet" href="index.css">
 </head>
 <body>
   <div class="container">
-    <div class="btn__container">
-      <button class="btn btn_rock">ROCK!</button>
-      <button class="btn btn_paper">PAPER!</button>
-      <button class="btn btn_scissors">SCISSORS!</button>
+    <div class="name_container">
+      <div class="name">ROCK! PAPER! SCISSORS!</div>
+      <div class="name_subtext">Win a best of 5 to reign supremacy over computers</div>
+    </div>
+    <div class="btn play">Play</div>
+    <div class="game_container" hidden>
+      <div class="btn_container">
+        <button class="btn btn_rock">ROCK!</button>
+        <button class="btn btn_paper">PAPER!</button>
+        <button class="btn btn_scissors">SCISSORS!</button>
+      </div>
+      <div class="game_status">
+        <div class="round_result"></div>
+      </div>
     </div>
   </div>
   
